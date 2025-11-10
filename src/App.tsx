@@ -4,13 +4,21 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import Index from "./pages/Index";
-import MiniGames from "./pages/MiniGames";
-import Team from "./pages/Team";
-import ChatChoobPage from "./pages/ChatChoob";
-import LeaderboardPage from "./pages/Leaderboard";
-import NotFound from "./pages/NotFound";
-import Auth from "./pages/Auth";
+import React, { Suspense, lazy } from "react";
+
+const Index = lazy(() => import("./pages/Index"));
+const MiniGames = lazy(() => import("./pages/MiniGames"));
+const Team = lazy(() => import("./pages/Team"));
+const ChatChoobPage = lazy(() => import("./pages/ChatChoob"));
+const LeaderboardPage = lazy(() => import("./pages/Leaderboard"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Auth = lazy(() => import("./pages/Auth"));
+
+const PageLoader = () => (
+  <div className="min-h-screen relative flex items-center justify-center">
+    <p className="text-xl text-muted-foreground">Memuat Halaman...</p>
+  </div>
+);
 
 const queryClient = new QueryClient();
 
@@ -136,7 +144,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <AnimatedRoutes />
+        <Suspense fallback={<PageLoader />}>
+          <AnimatedRoutes />
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
