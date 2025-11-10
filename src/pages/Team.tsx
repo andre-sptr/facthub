@@ -21,7 +21,7 @@ const teamMembers = [
   {
     name: "Insyanifa Syafwah",
     role: "Content Researcher",
-    instagram: "https://instagram.com/insynfsyfwh_",
+    instagram: "https://instagram.com/insynfasyfwh__",
     icon: "🌿",
     color: "from-earth-clay to-earth-terracotta",
   },
